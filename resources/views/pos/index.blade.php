@@ -30,7 +30,7 @@
                                         <div class="form-group row mb-0 col-md-5">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="search" id="pos_search"
-                                                    placeholder="Search by name or barcode..." value="{{ request('search') }}" autocomplete="off">
+                                                    placeholder="Pesquise por nome ou código de barras..." value="{{ request('search') }}" autocomplete="off">
                                                 <div class="input-group-append">
                                                     <button type="submit" class="input-group-text bg-primary text-white">
                                                         <x-heroicon-o-magnifying-glass class="w-5 h-5" />
@@ -47,7 +47,7 @@
                                         <!-- Category Filter -->
                                         <div class="form-group row mb-0 col-md-4">
                                             <select class="form-control" name="category_id" onchange="this.form.submit()">
-                                                <option value="">All Categories</option>
+                                                <option value="">Todas as Categorias</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
                                                             {{ $category->name }}
@@ -60,11 +60,11 @@
                                         <div class="form-group row mb-0 col-md-3">
                                             <select class="form-control" name="row" onchange="this.form.submit()">
                                                 <option value="10" {{ request('row') == '10' ? 'selected' : '' }}>10 /
-                                                    Page</option>
+                                                    Página</option>
                                                 <option value="20" {{ request('row') == '20' ? 'selected' : '' }}>20 /
-                                                    Page</option>
+                                                    Página</option>
                                                 <option value="50" {{ request('row') == '50' ? 'selected' : '' }}>50 /
-                                                    Page</option>
+                                                    Página</option>
                                             </select>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                             <!-- Stock Badge -->
                                             <span class="badge position-absolute shadow-sm"
                                                 style="top: 12px; right: 12px; font-size: 0.75rem; padding: 0.5em 0.8em; {{ $product->stock > 10 ? 'background-color: #10b981; color: white;' : 'background-color: #ef4444; color: white;' }}">
-                                                Stock: {{ $product->stock }}
+                                                Estoque: {{ $product->stock }}
                                             </span>
                                         </div>
 
@@ -121,7 +121,7 @@
                                 <div class="col-12">
                                     <div class="alert alert-info text-center">
                                         <x-heroicon-o-information-circle class="w-6 h-6 mx-auto mb-2" />
-                                        No products found.
+                                       Nenhum produto encontrado.
                                     </div>
                                 </div>
                             @endforelse
@@ -142,10 +142,10 @@
                 <div class="card border-0 shadow-lg sticky-top" style="top: 20px; z-index: 100;">
                     <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between p-3">
                         <h5 class="mb-0 text-white">
-                            <x-heroicon-o-shopping-cart class="w-5 h-5 mr-1 inline" /> Current Order
+                            <x-heroicon-o-shopping-cart class="w-5 h-5 mr-1 inline" /> Pedido Atual
                         </h5>
                         <span class="badge badge-light text-primary font-weight-bold" id="cart-count-badge">
-                            {{ Cart::count() }} items
+                            {{ Cart::count() }} itens
                         </span>
                     </div>
 
@@ -153,13 +153,13 @@
                         <!-- Customer Selection -->
                         <div class="p-3 border-bottom bg-light">
                             <div class="form-group mb-0">
-                                <label class="font-weight-bold mb-1">Customer</label>
+                                <label class="font-weight-bold mb-1">Cliente</label>
                                 <div class="input-group">
                                     <select class="form-control select2" id="customer_id" name="customer_id" style="width: 85%;">
-                                        <option value="" selected disabled>-- Search Customer --</option>
+                                        <option value="" selected disabled>-- Pesquisar Cliente --</option>
                                     </select>
                                     <div class="input-group-append" style="width: 15%;">
-                                        <button type="button" class="btn btn-outline-primary btn-block" title="Add New Customer" data-toggle="modal"
+                                        <button type="button" class="btn btn-outline-primary btn-block" title="Adicionar novo cliente" data-toggle="modal"
                                             data-target="#addCustomerModal">
                                             <x-heroicon-o-plus class="w-5 h-5 mx-auto" />
                                         </button>
@@ -184,7 +184,7 @@
             <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
                 <div class="modal-header bg-primary text-white"
                     style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                    <h5 class="modal-title font-weight-bold mx-auto">Complete Payment</h5>
+                    <h5 class="modal-title font-weight-bold mx-auto">Concluir pagamento</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -197,22 +197,22 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tr>
-                                    <td class="text-muted font-weight-bold">Total Bill:</td>
+                                    <td class="text-muted font-weight-bold">Valor total:</td>
                                     <td class="text-right font-weight-bold h5 text-primary" id="modal_total_display">
                                         {{ Cart::total() }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted font-weight-bold">Paid With:</td>
-                                    <td class="text-right font-weight-bold" id="modal_payment_method">Cash</td>
+                                    <td class="text-muted font-weight-bold">Pago Com:</td>
+                                    <td class="text-right font-weight-bold" id="modal_payment_method">Dinheiro</td>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted font-weight-bold">Amount Paid:</td>
+                                    <td class="text-muted font-weight-bold">Valor Pago:</td>
                                     <td class="text-right font-weight-bold h5 text-success" id="modal_pay_amount">0.00
                                     </td>
                                 </tr>
                                 <tr class="border-top">
-                                    <td class="text-muted font-weight-bold">Change:</td>
+                                    <td class="text-muted font-weight-bold">Troco:</td>
                                     <td class="text-right font-weight-bold h5 text-danger" id="modal_change_amount">0.00
                                     </td>
                                 </tr>
@@ -222,8 +222,8 @@
                             <!-- Modal Actions -->
                             <div class="modal-footer border-top-0 d-flex justify-content-between p-4 bg-light"
                                 style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
-                                <button type="button" class="btn btn-outline-secondary px-4" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary px-5 shadow-sm">Confirm Payment</button>
+                                <button type="button" class="btn btn-outline-secondary px-4" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary px-5 shadow-sm">Confirmar Pagamento</button>
                             </div>
                             </form>
                             </div>
@@ -235,7 +235,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title font-weight-bold">Add New Customer</h5>
+                    <h5 class="modal-title font-weight-bold">Adicionar novo cliente</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -245,30 +245,30 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="name">Name <span class="text-danger">*</span></label>
+                                <label for="name">Nome <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="name" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="email">Email</label>
+                                <label for="email">E-mail</label>
                                 <input type="email" class="form-control" name="email">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="phone">Phone</label>
+                                <label for="phone">Telefone</label>
                                 <input type="text" class="form-control" name="phone">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="city">City</label>
+                                <label for="city">Cidade</label>
                                 <input type="text" class="form-control" name="city">
                             </div>
                             <div class="col-md-12 form-group">
-                                <label for="address">Address</label>
+                                <label for="address">Endereço</label>
                                 <textarea class="form-control" name="address" rows="2"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Customer</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Cliente</button>
                     </div>
                 </form>
             </div>
@@ -285,7 +285,7 @@
         // Initialize Select2 on Load
             window.addEventListener('load', function () {
             $('.select2').select2({
-                placeholder: "-- Search Customer --",
+                placeholder: "-- Pesquisar cliente --",
                 allowClear: true,
                 width: 'resolve',
                 ajax: {
@@ -554,16 +554,16 @@
         (function() {
             const posSearchField = document.getElementById('pos_search');
             const searchForm = posSearchField ? posSearchField.closest('form') : null;
-            
+
             if (posSearchField && searchForm) {
                 let scannerTimeout;
-                
+
                 // Auto-focus search field on mobile devices
                 function isMobileDevice() {
                     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
                            (window.innerWidth <= 768);
                 }
-                
+
                 // Handle scanner input (scanners typically send Enter after barcode)
                 posSearchField.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.keyCode === 13) {
@@ -571,7 +571,7 @@
                         if (scannerTimeout) {
                             clearTimeout(scannerTimeout);
                         }
-                        
+
                         const searchValue = posSearchField.value.trim();
                         if (searchValue) {
                             // Check if this looks like a barcode scan (fast input + Enter)
@@ -583,7 +583,7 @@
                         }
                     }
                 });
-                
+
                 // Handle paste events (some scanners use paste)
                 posSearchField.addEventListener('paste', function(e) {
                     setTimeout(function() {
@@ -594,7 +594,7 @@
                         }
                     }, 50);
                 });
-                
+
                 // Auto-focus on mobile for better scanner experience
                 if (isMobileDevice()) {
                     setTimeout(function() {

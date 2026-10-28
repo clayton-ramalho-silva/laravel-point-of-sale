@@ -118,19 +118,19 @@
 
         <!-- Metadata -->
         <div class="d-flex justify-between mb-1">
-            <span>Date:</span>
+            <span>Data:</span>
             <span>{{ $order->created_at->format('d/m/Y H:i') }}</span>
         </div>
         <div class="d-flex justify-between mb-1">
-            <span>Invoice:</span>
+            <span>Fatura:</span>
             <span>#{{ $order->invoice_no }}</span>
         </div>
         <div class="d-flex justify-between mb-1">
-            <span>Cashier:</span>
+            <span>Caixa:</span>
             <span>{{ substr(auth()->user()->name ?? 'Staff', 0, 10) }}</span>
         </div>
          <div class="d-flex justify-between">
-            <span>Customer:</span>
+            <span>Cliente:</span>
             <span class="font-bold">{{ substr($order->customer->name, 0, 15) }}</span>
         </div>
 
@@ -141,9 +141,9 @@
             <thead>
                 <tr>
                     <th class="text-left" style="width: 45%">ITEM</th>
-                    <th class="text-center" style="width: 15%">QTY</th>
-                    <th class="text-right" style="width: 20%">PRICE</th>
-                    <th class="text-right" style="width: 20%">AMT</th>
+                    <th class="text-center" style="width: 15%">QTD</th>
+                    <th class="text-right" style="width: 20%">PREÇO</th>
+                    <th class="text-right" style="width: 20%">TOTAL</th>
                 </tr>
             </thead>
             <tbody>
@@ -170,7 +170,7 @@
                 <span>{{ number_format($order->sub_total, 0, ',', '.') }}</span>
             </div>
             <div class="d-flex justify-between mb-1">
-                <span>Tax</span>
+                <span>Taxa</span>
                 <span>{{ number_format($order->vat, 0, ',', '.') }}</span>
             </div>
 
@@ -180,19 +180,19 @@
             </div>
 
             <div class="d-flex justify-between mt-2 mb-1">
-                <span>Pay ({{ $order->payment_type ?? 'Cash' }})</span>
+                <span>Pago ({{ $order->payment_type ?? 'Cash' }})</span>
                 <span>{{ number_format($order->pay_amount, 0, ',', '.') }}</span>
             </div>
              <div class="d-flex justify-between">
-                <span>Change</span>
+                <span>Troco</span>
                 <span>{{ number_format($order->due_amount < 0 ? abs($order->due_amount) : 0, 0, ',', '.') }}</span>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer text-center">
-            <p class="mb-1">*** THANK YOU ***</p>
-            <p>Please keep this receipt for warranty.</p>
+            <p class="mb-1">*** Obrigado ***</p>
+            <p>Guarde este comprovante para fins de garantia.</p>
             <br>
             <p style="letter-spacing: 2px;">{{ $order->invoice_no }}</p>
         </div>

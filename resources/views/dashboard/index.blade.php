@@ -22,13 +22,13 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <h3 class="font-weight-bold">Dashboard Overview</h3>
-                        <p class="mb-0 text-muted">Welcome back, {{ auth()->user()->name }}! Here's what's happening in your
-                            store today.</p>
+                        <p class="mb-0 text-muted">Bem-vindo de volta, {{ auth()->user()->name }}! Veja o que está acontecendo na sua
+                            loja hoje.</p>
                     </div>
                     <div>
                         <a href="{{ route('pos.index') }}" class="btn btn-primary">
                             <x-heroicon-o-computer-desktop class="w-5 h-5 mr-2" />
-                            Go to POS
+                            Vá para POS
                         </a>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                                 <x-heroicon-o-banknotes class="w-6 h-6 text-info" />
                             </div>
                             <div>
-                                <p class="mb-2">Total Paid</p>
+                                <p class="mb-2">Total pago</p>
                                 <h4>${{ number_format($total_paid, 2) }}</h4>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                 <x-heroicon-o-credit-card class="w-6 h-6 text-danger" />
                             </div>
                             <div>
-                                <p class="mb-2">Total Due</p>
+                                <p class="mb-2">Total devido</p>
                                 <h4>${{ number_format($total_due, 2) }}</h4>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 <x-heroicon-o-check-circle class="w-6 h-6 text-success" />
                             </div>
                             <div>
-                                <p class="mb-2">Complete Orders</p>
+                                <p class="mb-2">Pedidos Completos</p>
                                 <h4>{{ $complete_orders }}</h4>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                                 <x-heroicon-o-clock class="w-6 h-6 text-warning" />
                             </div>
                             <div>
-                                <p class="mb-2">Pending Orders</p>
+                                <p class="mb-2">Pedidos Pendentes</p>
                                 <h4>{{ $pending_orders }}</h4>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                 <div class="card card-block card-stretch card-height">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Monthly Sales Overview ({{ date('Y') }})</h4>
+                            <h4 class="card-title">Visão Geral das Vendas Mensais ({{ date('Y') }})</h4>
                         </div>
                     </div>
                     <div class="card-body">
@@ -130,11 +130,11 @@
                 <div class="card card-block card-stretch card-height">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Recent Orders</h4>
+                            <h4 class="card-title">Pedidos Recentes</h4>
                         </div>
                         <div class="card-header-toolbar d-flex align-items-center">
                             <a href="{{ route('order.pendingOrders') }}"
-                                class="btn btn-outline-primary position-relative text-nowrap">View All</a>
+                                class="btn btn-outline-primary position-relative text-nowrap">Ver Todos</a>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -142,11 +142,11 @@
                             <table class="table mb-0">
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
-                                        <th>Date</th>
-                                        <th>Customer</th>
-                                        <th>Amount</th>
+                                        <th>Data</th>
+                                        <th>Cliente</th>
+                                        <th>Valor</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
@@ -169,7 +169,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">No recent orders found.</td>
+                                            <td colspan="5" class="text-center">Nenhum pedido recente encontrado.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -183,7 +183,7 @@
                 <div class="card card-block card-stretch card-height">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Top Selling Products</h4>
+                            <h4 class="card-title">Produtos Mais Vendidos</h4>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -191,9 +191,9 @@
                             <table class="table mb-0">
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
-                                        <th>Product</th>
+                                        <th>Produto</th>
                                         <th>Code</th>
-                                        <th>Sold</th>
+                                        <th>Vendido</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
@@ -205,7 +205,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="text-center">No sales data yet.</td>
+                                            <td colspan="3" class="text-center">Nenhum dado de vendas disponível.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -242,8 +242,8 @@
                         curve: 'smooth'
                     },
                     xaxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                            'Dec'
+                        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Agos', 'Set', 'Out', 'Nov',
+                            'Dez'
                         ],
                     },
                     tooltip: {

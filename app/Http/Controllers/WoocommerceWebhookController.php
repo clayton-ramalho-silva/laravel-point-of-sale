@@ -22,10 +22,12 @@ class WoocommerceWebhookController extends Controller
         $calculated = base64_encode(hash_hmac('sha256', $payload, $secret, true));
 
         if (!hash_equals($calculated, $signature)) {
-            Log::warning('Woocommerce webhook: assinatura inválida.', [
-                'received' => $signature,
+            \Log::warning('Falha na assinatura', [
+                'recebido_do_thunder' => $signature,
+                'calculado_pelo_laravel' => $calculated,
+                'payload_recebido' => $payload
             ]);
-            return response()->json(['error' => 'Assinatura inválida.'], 401);
+            return response()->json(['error' => 'Invalid signature'], 401);
         }
 
         // A partir daqui a requisição é legitima

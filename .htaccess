@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloqueia acesso direto à URL com /public
+    RewriteCond %{THE_REQUEST} \s/+public[/\s?] [NC]
+    RewriteRule ^ - [F,L]
+
+    # Reescreve todas as outras requisições para a pasta public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
+</IfModule>

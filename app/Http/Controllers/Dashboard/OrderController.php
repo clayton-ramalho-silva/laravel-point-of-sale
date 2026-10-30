@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Models\AppNotification;
 
 class OrderController extends Controller
 {
@@ -163,16 +164,46 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // public function updateStatus(Request $request)
+    // {
+    //     $order_id = $request->id;
+
+    //     DB::transaction(function () use ($order_id) {
+    //         $products = OrderDetails::where('order_id', $order_id)->get();
+
+    //         foreach ($products as $detail) {
+    //             Product::where('id', $detail->product_id)
+    //                 ->decrement('stock', $detail->quantity);
+    //         }
+
+    //         Order::findOrFail($order_id)->update(['order_status' => 'complete']);
+    //     });
+
+    //     return Redirect::route('order.pendingOrders')->with('success', 'Order has been completed!');
+    // }
     public function updateStatus(Request $request)
     {
         $order_id = $request->id;
 
         DB::transaction(function () use ($order_id) {
-            $products = OrderDetails::where('order_id', $order_id)->get();
+            $orderDetails = OrderDetails::where('order_id', $order_id)->get();
 
-            foreach ($products as $detail) {
-                Product::where('id', $detail->product_id)
-                    ->decrement('stock', $detail->quantity);
+            foreach ($orderDetails as $detail) {
+                // Busca o produto para verificar o nome e o estoque
+                $product = Product::find($detail->product_id);
+
+                if ($product) {
+                    // 🚨 VERIFICAÇÃO DE ESTOQUE NEGATIVO
+                    if (($product->stock - $detail->quantity) < 0) {
+                        AppNotification::create([
+                            'type' => 'stock_error',
+                            'message' => "Alerta: Venda no PDV do produto '{$product->name}' (SKU: {$product->code}) deixou o estoque zerado/negativo. Estoque anterior: {$product->stock}, baixa de: {$detail->quantity}.",
+                        ]);
+                    }
+
+                    // Dá a baixa
+                    $product->decrement('stock', $detail->quantity);
+                }
             }
 
             Order::findOrFail($order_id)->update(['order_status' => 'complete']);

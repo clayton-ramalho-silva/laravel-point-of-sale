@@ -40,6 +40,14 @@ class WoocommerceWebhookController extends Controller
             return response()->json(['status' => 'ignored', 'message' => 'Pedido sem itens ou ID'], 200);
         }
 
+        // 🛡️ PROTEÇÃO CONTRA DUPLICIDADE (IDEMPOTÊNCIA)
+        $pedidoJaExiste = Order::where('payment_type', 'WooCommerce #' . $wooOrderId)->exists();
+
+        if ($pedidoJaExiste) {
+            Log::info("Pedido E-commerce #{$wooOrderId} ignorado: já foi processado anteriormente.");
+            return response()->json(['status' => 'ignored', 'message' => 'Pedido já processado'], 200);
+        }
+
         // 3. Processamento da Venda e Baixa de Estoque
         try {
             DB::transaction(function () use ($orderData, $wooOrderId) {

@@ -85,6 +85,21 @@
                                         </li>
                 @endif
 
+                <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
+                    <a href="{{ route('notifications.index') }}" class="svg-icon">
+                        <x-heroicon-o-bell class="w-6 h-6" />
+                        <span class="ml-3">Notificações</span>
+
+                        @php
+                            $unreadCount = \App\Models\AppNotification::where('is_read', false)->count();
+                        @endphp
+
+                        @if($unreadCount > 0)
+                            <span class="badge badge-danger badge-pill float-right mt-1">{{ $unreadCount }}</span>
+                        @endif
+                    </a>
+                </li>
+
                 <hr>
 
                 @if (auth()->user()->can('employee.menu'))

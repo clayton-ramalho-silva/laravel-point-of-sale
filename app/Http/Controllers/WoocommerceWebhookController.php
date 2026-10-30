@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\Models\AppNotification;
 
 class WoocommerceWebhookController extends Controller
 {
@@ -62,15 +63,18 @@ class WoocommerceWebhookController extends Controller
                     $quantity = (int) $item['quantity'];
                     $price = (float) $item['price'];
 
-                    // Bloqueia a linha para evitar venda dupla
                     $product = Product::where('code', $sku)->lockForUpdate()->first();
 
                     if (!$product) {
-                        throw new \Exception("Produto com SKU {$sku} não encontrado no estoque físico.");
+                        throw new \Exception("Produto com SKU {$sku} não encontrado no cadastro.");
                     }
 
+                    // 🚨 AQUI ENTRA A NOTIFICAÇÃO EM VEZ DE BLOQUEAR
                     if ($product->stock < $quantity) {
-                        throw new \Exception("Estoque insuficiente para o SKU {$sku}. Disponível: {$product->stock}, solicitado: {$quantity}.");
+                        AppNotification::create([
+                            'type' => 'stock_error',
+                            'message' => "Alerta: Venda no e-commerce do produto '{$product->name}' (SKU: {$sku}) sem estoque suficiente. Estoque atual: {$product->stock}, pedido: {$quantity}.",
+                        ]);
                     }
 
                     $totalItem = $quantity * $price;
@@ -84,7 +88,7 @@ class WoocommerceWebhookController extends Controller
                         'total' => $totalItem,
                     ];
 
-                    // Baixa no estoque
+                    // Dá a baixa (o estoque pode ficar negativo, o que é aceitável nesse cenário)
                     $product->decrement('stock', $quantity);
                 }
 

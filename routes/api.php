@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WoocommerceWebhookController;
+use App\Http\Controllers\WoocommerceOrderUpdatedController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/webhooks/woocommerce', WooCommerceWebhookController::class);
+Route::post('/webhooks/woocommerce/updated', WoocommerceOrderUpdatedController::class);
+

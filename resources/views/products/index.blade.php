@@ -38,9 +38,8 @@
 
             <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">Product List</h4>
-                    <p class="mb-0">A product dashboard lets you easily gather and visualize product data from optimizing <br>
-                        the product experience, ensuring product retention. </p>
+                    <h4 class="mb-3">Lista de produtos</h4>
+                    <p class="mb-0">Um painel de produto permite coletar e visualizar facilmente dados sobre o produto, <br>auxiliando na otimização da experiência com o produto e garantindo a retenção. </p>
                 </div>
                 <!-- begin: Action Buttons -->
                 <div class="d-flex align-items-center">
@@ -51,7 +50,7 @@
                         <x-heroicon-o-arrow-down-tray class="w-5 h-5 mr-1" /> Export
                     </a>
                     <a href="{{ route('products.create') }}" class="btn btn-primary add-list d-flex align-items-center">
-                        <x-heroicon-o-plus class="w-5 h-5 mr-1" /> Add Product
+                        <x-heroicon-o-plus class="w-5 h-5 mr-1" /> Adicionar Produto
                     </a>
                 </div>
                 <!-- end: Action Buttons -->
@@ -97,13 +96,13 @@
                     <thead class="bg-white text-uppercase">
                         <tr class="ligth ligth-data">
                             <th>No.</th>
-                            <th>Photo</th>
-                            <th><x-sort-link name="name" label="Name" /></th>
-                            <th><x-sort-link name="category.name" label="Category" /></th>
-                            <th><x-sort-link name="selling_price" label="Price" /></th>
-                            <th><x-sort-link name="stock" label="Stock" /></th>
+                            <th>Foto</th>
+                            <th><x-sort-link name="name" label="Nome" /></th>
+                            <th><x-sort-link name="category.name" label="Categoria" /></th>
+                            <th><x-sort-link name="selling_price" label="Preço" /></th>
+                            <th><x-sort-link name="stock" label="Estoque" /></th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody class="ligth-body">
@@ -119,9 +118,9 @@
                             <td>{{ $product->stock }}</td>
                             <td>
                                 @if ($product->expire_date > Carbon\Carbon::now()->format('Y-m-d'))
-                                    <span class="badge rounded-pill bg-success">Valid</span>
+                                    <span class="badge rounded-pill bg-success">Valido</span>
                                 @else
-                                    <span class="badge rounded-pill bg-danger">Invalid</span>
+                                    <span class="badge rounded-pill bg-danger">Invalido</span>
                                 @endif
                             </td>
                             <td>
@@ -147,7 +146,7 @@
                         @empty
                         <tr>
                             <td colspan="8" class="text-center">
-                                <span class="text-muted">No products found.</span>
+                                <span class="text-muted">Nenhum produto encontrado.</span>
                             </td>
                         </tr>
                         @endforelse

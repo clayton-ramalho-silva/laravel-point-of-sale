@@ -13,11 +13,11 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="form-group col-md-6">
-                                <label>Product Code</label>
+                                <label>Código do Produto / SKU</label>
                                 <input type="text" class="form-control bg-white" value="{{  $product->code }}" readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Product Barcode</label>
+                                <label>Barcode do Produto</label>
                                 {!! $barcode !!}
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Product Information</h4>
+                            <h4 class="card-title">Informações do Produto</h4>
                         </div>
                     </div>
 
@@ -50,33 +50,33 @@
 
                         <div class="row align-items-center">
                             <div class="form-group col-md-12">
-                                <label>Product Name</label>
+                                <label>Nome do Produto</label>
                                 <input type="text" class="form-control bg-white" value="{{  $product->name }}" readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Category</label>
+                                <label>Categoria</label>
                                 <input type="text" class="form-control bg-white" value="{{  $product->category->name }}"
                                     readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Stock</label>
+                                <label>Estoque</label>
                                 <input type="text" class="form-control bg-white" value="{{  $product->stock }}" readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Buying Date</label>
+                                <label>Data de Compra</label>
                                 <input class="form-control bg-white" value="{{ $product->buying_date }}" readonly />
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Expire Date</label>
+                                <label>Data de Expiração</label>
                                 <input class="form-control bg-white" value="{{ $product->expire_date }}" readonly />
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Buying Price</label>
+                                <label>Preço de Compra</label>
                                 <input type="text" class="form-control bg-white" value="{{  $product->buying_price }}"
                                     readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Selling Price</label>
+                                <label>Preço de Venda</label>
                                 <input type="text" class="form-control bg-white" value="{{  $product->selling_price }}"
                                     readonly>
                             </div>
@@ -86,11 +86,11 @@
                         <div class="mt-2 text-center">
                             <a class="btn btn-warning mr-2" href="{{ route('products.edit', $product->id) }}">
                                 <x-heroicon-o-pencil class="w-5 h-5 mr-1"
-                                    style="display:inline-block; vertical-align:middle;" /> Edit
+                                    style="display:inline-block; vertical-align:middle;" /> Editar
                             </a>
                             <a class="btn btn-primary" href="{{ route('products.index') }}">
                                 <x-heroicon-o-arrow-left class="w-5 h-5 mr-1"
-                                    style="display:inline-block; vertical-align:middle;" /> Back
+                                    style="display:inline-block; vertical-align:middle;" /> Voltar
                             </a>
                         </div>
                     </div>

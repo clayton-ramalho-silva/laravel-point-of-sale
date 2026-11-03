@@ -33,12 +33,12 @@
                 <!-- Header: Page Title and Clear Search -->
                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                     <div>
-                        <h4 class="mb-3">Pending Due List</h4>
-                        <p class="mb-0">List of orders with outstanding due amounts.</p>
+                        <h4 class="mb-3">Lista de Pendências</h4>
+                        <p class="mb-0">Lista de pedidos com valores pendentes.</p>
                     </div>
                     <div>
                         <a href="{{ route('order.pendingDue') }}" class="btn btn-danger add-list d-flex align-items-center">
-                            <x-heroicon-o-trash class="w-5 h-5 mr-1" /> Clear Search
+                            <x-heroicon-o-trash class="w-5 h-5 mr-1" /> Limpar busca
                         </a>
                     </div>
                 </div>
@@ -69,10 +69,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="search">Search:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="search">Pesquisar:</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
-                                            <input type="text" id="search" class="form-control" name="search" placeholder="Search order"
+                                            <input type="text" id="search" class="form-control" name="search" placeholder="Pesquisar pedido"
                                                 value="{{ request('search') }}">
                                             <div class="input-group-append">
                                                 <button type="submit" class="input-group-text bg-primary">
@@ -91,13 +91,13 @@
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
                                         <th>No.</th>
-                                        <th>Invoice No</th>
-                                        <th><x-sort-link name="customer.name" label="Name" /></th>
-                                        <th><x-sort-link name="order_date" label="Order Date" /></th>
-                                        <th>Payment</th>
-                                        <th><x-sort-link name="pay_amount" label="Pay" /></th>
-                                        <th><x-sort-link name="due_amount" label="Due" /></th>
-                                        <th>Action</th>
+                                        <th>Nº da fatura</th>
+                                        <th><x-sort-link name="customer.name" label="Nome" /></th>
+                                        <th><x-sort-link name="order_date" label="Data do Pedido" /></th>
+                                        <th>Pagamento</th>
+                                        <th><x-sort-link name="pay_amount" label="Pagamento" /></th>
+                                        <th><x-sort-link name="due_amount" label="Pendente" /></th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
@@ -108,9 +108,9 @@
                                             <td>{{ $order->customer->name }}</td>
                                             <td>{{ $order->order_date->format('Y-m-d') }}</td>
                                             <td>{{ $order->payment_type }}</td>
-                                            <td>{{ number_format($order->pay_amount, 2) }}</td>
+                                            <td>R$ {{ number_format($order->pay_amount, 2, ',', '.') }}</td>
                                             <td>
-                                                <span class="badge badge-warning">{{ number_format($order->due_amount, 2) }}</span>
+                                                <span class="badge badge-warning">R$ {{ number_format($order->due_amount, 2, ',', '.') }}</span>
                                             </td>
                                             <td>
                                                 <div class="d-flex align-items-center list-action">
@@ -129,7 +129,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center">No pending due orders found.</td>
+                                            <td colspan="8" class="text-center">Nenhum pedido pendente encontrado.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -150,7 +150,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pay Due Amount</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Pagar o valor devido</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -161,13 +161,13 @@
                     <div class="modal-body">
                         <input type="hidden" name="order_id" id="order_id">
                         <div class="form-group">
-                            <label for="due_amount">Pay Amount</label>
+                            <label for="due_amount">Valor a Pagar</label>
                             <input type="number" class="form-control" name="due_amount" id="due_amount" required step="0.01">
                             </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Pay</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Pagar</button>
                             </div>
                             </form>
                             </div>

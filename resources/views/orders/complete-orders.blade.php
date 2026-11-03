@@ -33,12 +33,12 @@
                 <!-- Header: Page Title and Clear Search -->
                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
                     <div>
-                        <h4 class="mb-3">Complete Order List</h4>
-                        <p class="mb-0">List of all completed orders. You can view details or reprint invoices.</p>
+                        <h4 class="mb-3">Lista completa de pedidos</h4>
+                        <p class="mb-0">Lista de todos os pedidos concluídos. Você pode visualizar detalhes ou reimprimir notas fiscais.</p>
                     </div>
                     <div>
                         <a href="{{ route('order.completeOrders') }}" class="btn btn-danger add-list d-flex align-items-center">
-                            <x-heroicon-o-trash class="w-5 h-5 mr-1" /> Clear Search
+                            <x-heroicon-o-trash class="w-5 h-5 mr-1" /> Limpar Pesquisa
                         </a>
                     </div>
                 </div>
@@ -71,11 +71,11 @@
 
                                 <!-- Search Input -->
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="search">Search:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="search">Pesquisar:</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <input type="text" id="search" class="form-control" name="search"
-                                                placeholder="Search order" value="{{ request('search') }}">
+                                                placeholder="Pesquisar pedido" value="{{ request('search') }}">
                                             <div class="input-group-append">
                                                 <button type="submit" class="input-group-text bg-primary">
                                                     <x-heroicon-o-magnifying-glass class="w-5 h-5" />
@@ -93,13 +93,13 @@
                                 <thead class="bg-white text-uppercase">
                                     <tr class="ligth ligth-data">
                                         <th>No.</th>
-                                        <th>Invoice No</th>
-                                        <th><x-sort-link name="customer.name" label="Name" /></th>
-                                        <th><x-sort-link name="order_date" label="Order Date" /></th>
-                                        <th>Payment</th>
+                                        <th>Nº da fatura</th>
+                                        <th><x-sort-link name="customer.name" label="Nome" /></th>
+                                        <th><x-sort-link name="order_date" label="Data do Pedido" /></th>
+                                        <th>Pagamento</th>
                                         <th><x-sort-link name="total" label="Total" /></th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody class="ligth-body">
@@ -110,7 +110,7 @@
                                             <td>{{ $order->customer->name }}</td>
                                             <td>{{ $order->order_date->format('Y-m-d') }}</td>
                                             <td>{{ $order->payment_type }}</td>
-                                            <td>{{ number_format($order->total, 2) }}</td>
+                                            <td>R$ {{ number_format($order->total, 2, ',', '.') }}</td>
                                             <td>
                                                 <span class="badge badge-success">{{ ucfirst($order->order_status) }}</span>
                                             </td>
@@ -131,7 +131,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center">No complete orders found.</td>
+                                            <td colspan="8" class="text-center">Nenhum pedido concluído encontrado.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

@@ -44,7 +44,7 @@
                             </div>
                             <div>
                                 <p class="mb-2">Total pago</p>
-                                <h4>${{ number_format($total_paid, 2) }}</h4>
+                                <h4>R${{ number_format($total_paid, 2, ',', '.') }}</h4>
                             </div>
                         </div>
                         <div class="iq-progress-bar mt-2">
@@ -63,7 +63,7 @@
                             </div>
                             <div>
                                 <p class="mb-2">Total devido</p>
-                                <h4>${{ number_format($total_due, 2) }}</h4>
+                                <h4>R${{ number_format($total_due, 2, ',', '.') }}</h4>
                             </div>
                         </div>
                         <div class="iq-progress-bar mt-2">
@@ -154,7 +154,7 @@
                                         <tr>
                                             <td>{{ $order->created_at->format('d M Y') }}</td>
                                             <td>{{ $order->customer->name ?? 'Walk-in Customer' }}</td>
-                                            <td>${{ number_format($order->total, 2) }}</td>
+                                            <td>R${{ number_format($order->total, 2, ',', '.') }}</td>
                                             <td>
                                                 <span
                                                     class="badge {{ $order->order_status == 'complete' ? 'bg-success' : 'bg-warning' }}">
@@ -225,7 +225,7 @@
             if (typeof ApexCharts !== 'undefined') {
                 var options = {
                     series: [{
-                        name: 'Sales',
+                        name: 'Vendas',
                         data: {!! $chart_data !!}
                     }],
                     chart: {
@@ -249,7 +249,7 @@
                     tooltip: {
                         y: {
                             formatter: function (val) {
-                                return "$ " + val
+                                return "R$ " + val
                             }
                         }
                     },

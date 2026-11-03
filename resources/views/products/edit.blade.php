@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Edit Product</h4>
+                            <h4 class="card-title">Editar Produto</h4>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image"
                                             accept="image/*" onchange="previewImage();">
-                                        <label class="custom-file-label" for="image">Choose file</label>
+                                        <label class="custom-file-label" for="image">Escolher arquivo</label>
                                         </div>
                                     @error('image')
                                         <div class="invalid-feedback">
@@ -53,7 +53,7 @@
                             <!-- begin: Input Data -->
                             <div class="row align-items-center">
                                 <div class="form-group col-md-12">
-                                    <label for="name">Product Name <span class="text-danger">*</span></label>
+                                    <label for="name">Nome do Produto <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                                         value="{{ old('name', $product->name) }}" required>
                                     @error('name')
@@ -64,10 +64,10 @@
                                     </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="code">Product Code</label>
+                                    <label for="code">Código do Produto / SKU</label>
                                     <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code"
                                         value="{{ old('code', $product->code) }}" maxlength="50">
-                                    <small class="form-text text-muted">Edit code or scan new barcode below</small>
+                                    <small class="form-text text-muted">Editar código ou digitalizar novo código de barras abaixo</small>
                                     @error('code')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -77,15 +77,15 @@
 
                                 <div class="form-group col-md-6">
                                     <label for="barcode_scanner">Barcode Scanner</label>
-                                    <input type="text" class="form-control" id="barcode_scanner" 
-                                        placeholder="Scan barcode here (mobile-friendly)" autocomplete="off">
-                                    <small class="form-text text-muted">Scan barcode to update Product Code</small>
+                                    <input type="text" class="form-control" id="barcode_scanner"
+                                        placeholder="Escaneie o código de barras aqui (otimizado para dispositivos móveis)" autocomplete="off">
+                                    <small class="form-text text-muted">Escaneie o código de barras para atualizar o Código do Produto</small>
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="category_id">Category <span class="text-danger">*</span></label>
+                                    <label for="category_id">Categoria <span class="text-danger">*</span></label>
                                     <select class="form-control" name="category_id" required>
-                                        <option selected="" disabled>-- Select Category --</option>
+                                        <option selected="" disabled>-- Selecione a Categoria --</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
                                                 {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}
@@ -100,7 +100,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="stock">Stock</label>
+                                    <label for="stock">Estoque</label>
                                     <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock"
                                         value="{{ old('stock', $product->stock) }}">
                                     @error('stock')
@@ -111,7 +111,7 @@
                                     </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="buying_price">Buying Price <span class="text-danger">*</span></label>
+                                    <label for="buying_price">Preço de Compra <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control @error('buying_price') is-invalid @enderror" id="buying_price"
                                         name="buying_price" value="{{ old('buying_price', $product->buying_price) }}" required>
                                     @error('buying_price')
@@ -122,7 +122,7 @@
                                     </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="selling_price">Selling Price <span class="text-danger">*</span></label>
+                                    <label for="selling_price">Preço de Venda <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control @error('selling_price') is-invalid @enderror" id="selling_price"
                                         name="selling_price" value="{{ old('selling_price', $product->selling_price) }}" required>
                                     @error('selling_price')
@@ -133,7 +133,7 @@
                                     </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="buying_date">Buying Date</label>
+                                    <label for="buying_date">Data de Compra</label>
                                     <input id="buying_date" class="form-control @error('buying_date') is-invalid @enderror" name="buying_date"
                                         value="{{ old('buying_date', $product->buying_date) }}" />
                                     @error('buying_date')
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="expire_date">Expire Date</label>
+                                    <label for="expire_date">Data de Expiração</label>
                                     <input id="expire_date" class="form-control @error('expire_date') is-invalid @enderror" name="expire_date"
                                         value="{{ old('expire_date', $product->expire_date) }}" />
                                     @error('expire_date')
@@ -188,42 +188,42 @@
         (function() {
             const barcodeScanner = document.getElementById('barcode_scanner');
             const codeField = document.getElementById('code');
-            
+
             if (barcodeScanner && codeField) {
                 let scannerTimeout;
-                
+
                 // Auto-focus scanner field on mobile devices
                 function isMobileDevice() {
                     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
                            (window.innerWidth <= 768);
                 }
-                
+
                 if (isMobileDevice()) {
                     // Auto-focus scanner field on mobile after a short delay
                     setTimeout(function() {
                         barcodeScanner.focus();
                     }, 300);
                 }
-                
+
                 // Handle scanner input (scanners typically send Enter after barcode)
                 barcodeScanner.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.keyCode === 13) {
                         e.preventDefault();
-                        
+
                         const scannedValue = barcodeScanner.value.trim();
                         if (scannedValue) {
                             // Populate code field with scanned value
                             codeField.value = scannedValue;
-                            
+
                             // Visual feedback
                             codeField.classList.add('border-success');
                             setTimeout(function() {
                                 codeField.classList.remove('border-success');
                             }, 1000);
-                            
+
                             // Clear scanner field
                             barcodeScanner.value = '';
-                            
+
                             // Re-focus scanner for next scan
                             if (isMobileDevice()) {
                                 setTimeout(function() {
@@ -233,7 +233,7 @@
                         }
                     }
                 });
-                
+
                 // Handle paste events (some scanners use paste)
                 barcodeScanner.addEventListener('paste', function(e) {
                     setTimeout(function() {

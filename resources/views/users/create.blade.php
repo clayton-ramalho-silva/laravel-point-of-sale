@@ -89,8 +89,8 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="role">Role</label>
-                                    <select class="form-control @error('role') is-invalid @enderror" name="role">
-                                        <option selected="" disabled>-- Select Role --</option>
+                                    <select class="form-control @error('role') is-invalid @enderror" name="role" required>
+                                        <option value="" selected disabled>-- Select Role --</option>
                                         @foreach ($roles as $role)
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach

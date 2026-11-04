@@ -242,7 +242,7 @@
                         curve: 'smooth'
                     },
                     xaxis: {
-                        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Agos', 'Set', 'Out', 'Nov',
+                        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov',
                             'Dez'
                         ],
                     },
